@@ -1,0 +1,95 @@
+
+
+.App{
+    margin-top:50px;
+}
+
+.display {
+    font-size: 30px;
+    font-weight: 500;
+    background: white;
+    color:black;
+    border-radius:10px;
+    height:75px;
+    display:flex;
+    justify-content: flex-end;
+    align-items: center;
+    width:355px;
+    overflow:hidden;
+
+}
+
+.calculator {
+    background-color: #131015;
+    padding: 10px;
+    width:400px;
+    height:600px;
+    border-radius:30px;
+    margin:auto;
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content: 
+    center;
+}
+
+button.Button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #131015;
+    place-self: center;
+    }
+
+.buttons{
+    display: grid;
+    grid-row-gap: 25px;
+    grid-column-gap: 25px;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+}
+
+.Button {
+    align-items: center;
+    font-weight: 400;
+    background: #333;
+    border-radius: 50%;
+    color:white;
+    cursor: pointer;
+    display: flex;
+    font-size: 30px;
+    height: 70px;
+    justify-content: center;
+    width: 70px;
+    transition: filter 0.3s ease-in;
+}
+
+.Button:active,
+.Button:focus {
+    filter: brightness(110%);
+    outline:none;
+}
+
+.Button:hover {
+    filter: brightness(130%);
+    outline:none;
+}
+
+.Button.zero {
+    width: 170px;
+    grid-column: 1 / span 2;
+    border-radius: 57.5px;
+    position: relative;
+    justify-content: flex-start;
+    padding-left: 20px;
+}
+
+.Button.function {
+    color:black;
+    background: #a5a5a5;
+}
+
+.Button.operator {
+    color:black;
+    background: #f1a33c;
+}
