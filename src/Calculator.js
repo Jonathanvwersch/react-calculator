@@ -6,7 +6,6 @@ const Calculator = () => {
   const [value, setValue] = useState("0");
   const [numInMemory, setNumInMemory] = useState(parseFloat(value));
   const [operator, setOperator] = useState(null);
-  const num = parseFloat(value);
 
   const handleButtonPress = (name) => () => {
     switch (name) {
@@ -17,13 +16,19 @@ const Calculator = () => {
         break;
 
       case "±":
-        setValue((num * -1).toString());
+        setValue((parseFloat(value) * -1).toString());
         break;
 
       case "%":
-        setValue((num / 100).toString());
+        setValue((parseFloat(value) / 100).toString());
         setNumInMemory(null);
         setOperator(null);
+        break;
+
+      case ".":
+        if (value.includes("."))
+          break;
+        setValue(value + ".")
         break;
 
       case "+":
@@ -34,7 +39,7 @@ const Calculator = () => {
             setNumInMemory(numInMemory - parseFloat(value));
           } else if (operator === "÷") {
             setNumInMemory(numInMemory / parseFloat(value));
-          } else if (operator === "x") {
+          } else if (operator === "×") {
             setNumInMemory(numInMemory * parseFloat(value));
           }
         } else {
@@ -47,13 +52,13 @@ const Calculator = () => {
       case "×":
         if (operator != null) {
           if (operator === "×") {
-            setNumInMemory(numInMemory + parseFloat(value));
+            setNumInMemory(numInMemory * parseFloat(value));
           } else if (operator === "−") {
             setNumInMemory(numInMemory - parseFloat(value));
           } else if (operator === "÷") {
             setNumInMemory(numInMemory / parseFloat(value));
-          } else if (operator === "x") {
-            setNumInMemory(numInMemory * parseFloat(value));
+          } else if (operator === "+") {
+            setNumInMemory(numInMemory + parseFloat(value));
           }
         } else {
           setNumInMemory(parseFloat(value));
@@ -65,12 +70,12 @@ const Calculator = () => {
       case "−":
         if (operator != null) {
           if (operator === "−") {
-            setNumInMemory(numInMemory + parseFloat(value));
-          } else if (operator === "−") {
             setNumInMemory(numInMemory - parseFloat(value));
+          } else if (operator === "+") {
+            setNumInMemory(numInMemory + parseFloat(value));
           } else if (operator === "÷") {
             setNumInMemory(numInMemory / parseFloat(value));
-          } else if (operator === "x") {
+          } else if (operator === "×") {
             setNumInMemory(numInMemory * parseFloat(value));
           }
         } else {
@@ -83,12 +88,12 @@ const Calculator = () => {
       case "÷":
         if (operator != null) {
           if (operator === "÷") {
-            setNumInMemory(numInMemory + parseFloat(value));
-          } else if (operator === "-") {
-            setNumInMemory(numInMemory - parseFloat(value));
-          } else if (operator === "÷") {
             setNumInMemory(numInMemory / parseFloat(value));
-          } else if (operator === "x") {
+          } else if (operator === "−") {
+            setNumInMemory(numInMemory - parseFloat(value));
+          } else if (operator === "+") {
+            setNumInMemory(numInMemory + parseFloat(value));
+          } else if (operator === "×") {
             setNumInMemory(numInMemory * parseFloat(value));
           }
         } else {
@@ -112,11 +117,16 @@ const Calculator = () => {
         }
 
         setNumInMemory(null);
-        setOperator(null);
+        setOperator("=");
         break;
 
       default:
         setValue(parseFloat(value + name).toString());
+        if (operator === "=")
+        {
+          setValue(name);
+          setOperator(null);
+        }
         break;
     }
   };
